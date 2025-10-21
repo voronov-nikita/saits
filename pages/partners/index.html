@@ -6,14 +6,20 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <header>
-            Детский Технопарк "Альтаир"
-            <div class="datetime-wrap">
-                <div id="weekday" class="accent-time"></div>
-                <div id="date" class="accent-time"></div>
-                <div id="clock" class="accent-time"></div>
+        <div class="top-bar">
+            <div class="main-title">Детский Технопарк "Альтаир"</div>
+            <div class="date-widget">
+                <div class="weekday-box" id="weekday"></div>
+                <div class="datebox">
+                    <span id="fulldate"></span>
+                    <span id="time"></span>
+                    <div class="weekline">
+                        <span id="weeknumber"></span> неделя<br />
+                        <span id="schedule">Перерыв</span>
+                    </div>
+                </div>
             </div>
-        </header>
+        </div>
 
         <div class="partners">
             <div class="partner-card" style="top: 80px; left: 8vw">
