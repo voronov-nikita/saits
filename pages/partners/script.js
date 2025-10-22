@@ -43,7 +43,7 @@ setInterval(updateDateWidget, 1000);
 updateDateWidget();
 
 // ------ Погодный виджет из OpenWeatherMap ------
-const API_KEY = "YOUR_OPENWEATHERMAP_API_KEY"; // замените на свой ключ
+const API_KEY = "1df2eb92e9b510458f1e2edebaace0eb"; // замените на свой ключ
 const CITY = "Moscow";
 function fetchWeather() {
     fetch(

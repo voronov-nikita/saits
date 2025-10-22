@@ -6,125 +6,152 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <div class="top-bar">
-            <div class="card main-title">Детский Технопарк "Альтаир"</div>
-            <div class="card date-widget">
-                <div class="weekday-box" id="weekday"></div>
-                <div class="datebox">
-                    <span id="fulldate"></span>
-                    <span id="time"></span>
-                    <div class="weekline">
-                        <span id="weeknumber"></span> неделя<br />
-                        <span id="schedule">Перерыв</span>
+        <div class="main-bg">
+            <div class="top-widget-row">
+                <div class="main-title-card">
+                    <span class="main-title">Детский Технопарк "Альтаир"</span>
+                </div>
+                <div class="date-widget-card">
+                    <div class="weekday-box" id="weekday"></div>
+                    <div class="date-layout">
+                        <div class="fulldate" id="fulldate"></div>
+                        <div class="bigtime" id="time"></div>
+                        <div class="studweek">
+                            <span id="weeknumber"></span> неделя<br />
+                            <span id="schedule">Перерыв</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wide-row">
+                <div class="partners-card">
+                    <div class="partners-title">Индустриальные партнёры</div>
+                    <div class="partners-grid">
+                        <div class="partner-cell" data-partner="rostec">
+                            <img src="./img/partner_rostech.png" alt="Ростех" />
+                            <div class="partner-name">Ростех</div>
+                        </div>
+                        <div class="partner-cell" data-partner="1c">
+                            <img src="./img/partner_1c.png" alt="1C" />
+                            <div class="partner-name">1C</div>
+                        </div>
+                        <div class="partner-cell" data-partner="krok">
+                            <img src="./img/partner_krok.png" alt="КРОК" />
+                            <div class="partner-name">КРОК</div>
+                        </div>
+                        <div class="partner-cell" data-partner="astra">
+                            <img src="./img/partner_astra.png" alt="Астра" />
+                            <div class="partner-name">Астра</div>
+                        </div>
+                        <div class="partner-cell" data-partner="rosatom">
+                            <img
+                                src="./img/partner_rosatom.png"
+                                alt="Росатом"
+                            />
+                            <div class="partner-name">Росатом</div>
+                        </div>
+                        <div class="partner-cell" data-partner="yandex_lyceum">
+                            <img
+                                src="./img/partner_yandex_lyceum.png"
+                                alt="Яндекс Лицей"
+                            />
+                            <div class="partner-name">Яндекс Лицей</div>
+                        </div>
+                        <div class="partner-cell" data-partner="it_school">
+                            <img
+                                src="./img/partner_it_school.png"
+                                alt="IT Школа"
+                            />
+                            <div class="partner-name">IT Школа</div>
+                        </div>
+                        <div class="partner-cell" data-partner="solar">
+                            <img src="./img/partner_solar.png" alt="Солар" />
+                            <div class="partner-name">Солар</div>
+                        </div>
+                        <div class="partner-cell" data-partner="rostelecom">
+                            <img
+                                src="./img/partner_rostelecom.png"
+                                alt="Ростелеком"
+                            />
+                            <div class="partner-name">Ростелеком</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-widgets">
+                    <div class="weather-card">
+                        <div class="weather-row">
+                            <div class="side-label">
+                                Восход<br /><span
+                                    class="side-small"
+                                    id="sunrise"
+                                    >--:--</span
+                                >
+                            </div>
+                            <div class="weather-main">
+                                <div class="weather-temp" id="weather-temp">
+                                    --
+                                </div>
+                                <div
+                                    class="weather-feel"
+                                    id="weather-feel"
+                                ></div>
+                                <div class="weather-desc" id="weather-desc">
+                                    --
+                                </div>
+                            </div>
+                            <div class="side-label">
+                                Закат<br /><span class="side-small" id="sunset"
+                                    >--:--</span
+                                >
+                            </div>
+                        </div>
+                        <div class="weather-footer">
+                            <div>
+                                <span>Ветер</span><br /><b id="weather-wind"
+                                    >--</b
+                                >
+                            </div>
+                            <div>
+                                <span>Давление</span><br /><b
+                                    id="weather-pressure"
+                                    >--</b
+                                >
+                            </div>
+                            <div>
+                                <span>Влажность</span><br /><b
+                                    id="weather-humidity"
+                                    >--</b
+                                >
+                            </div>
+                            <div>
+                                <span>Г/м</span><br /><b id="weather-gm">--</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qr-codes-row">
+                        <div class="qr-cell">
+                            <img
+                                src="./img/qr_telegram.png"
+                                alt="QR Telegram"
+                            />
+                            <div class="qr-label">Телеграм-канал Альтаир</div>
+                        </div>
+                        <div class="qr-cell">
+                            <img
+                                src="./img/qr_calendar.png"
+                                alt="QR Календарь"
+                            />
+                            <div class="qr-label">Календарь мероприятий</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="partners-weather-row">
-            <div class="partners-grid-block">
-                <h3>Индустриальные партнёры</h3>
-                <div class="partners-grid">
-                    <div class="partner-card" data-partner="rostec">
-                        <img src="./img/partner_rostech.png" alt="Ростех" />
-                        <div class="partner-name">Ростех</div>
-                    </div>
-                    <div class="partner-card" data-partner="1c">
-                        <img src="./img/partner_1c.png" alt="1C" />
-                        <div class="partner-name">1C</div>
-                    </div>
-                    <div class="partner-card" data-partner="krok">
-                        <img src="./img/partner_krok.png" alt="КРОК" />
-                        <div class="partner-name">КРОК</div>
-                    </div>
-                    <div class="partner-card" data-partner="astra">
-                        <img src="./img/partner_astra.png" alt="Астра" />
-                        <div class="partner-name">Астра</div>
-                    </div>
-                    <div class="partner-card" data-partner="rosatom">
-                        <img src="./img/partner_rosatom.png" alt="Росатом" />
-                        <div class="partner-name">Росатом</div>
-                    </div>
-                    <div class="partner-card" data-partner="yandex_lyceum">
-                        <img
-                            src="./img/partner_yandex_lyceum.png"
-                            alt="Яндекс Лицей"
-                        />
-                        <div class="partner-name">Яндекс Лицей</div>
-                    </div>
-                    <div class="partner-card" data-partner="it_school">
-                        <img
-                            src="./img/partner_it_school.png"
-                            alt="IT Школа Samsung"
-                        />
-                        <div class="partner-name">IT Школа</div>
-                    </div>
-                    <div class="partner-card" data-partner="solar">
-                        <img src="./img/partner_solar.png" alt="Солар" />
-                        <div class="partner-name">Солар</div>
-                    </div>
-                    <div class="partner-card" data-partner="rostelecom">
-                        <img
-                            src="./img/partner_rostelecom.png"
-                            alt="Ростелеком"
-                        />
-                        <div class="partner-name">Ростелеком</div>
-                    </div>
-                </div>
-            </div>
-            <div class="card weather-widget">
-                <div class="weather-center">
-                    <div class="weather-sun tech">
-                        <span class="label">Восход</span>
-                        <span id="sunrise">--:--</span>
-                    </div>
-                    <div class="weather-temp-block">
-                        <span class="weather-temp" id="weather-temp">--</span>
-                        <span class="weather-feel" id="weather-feel"></span>
-                        <div class="weather-desc" id="weather-desc">--</div>
-                    </div>
-                    <div class="weather-sun">
-                        <span class="label">Закат</span>
-                        <span id="sunset">--:--</span>
-                    </div>
-                </div>
-                <div class="weather-footer">
-                    <div>
-                        <span>Ветер</span><br /><b id="weather-wind">--</b>
-                    </div>
-                    <div>
-                        <span>Давление</span><br /><b id="weather-pressure"
-                            >--</b
-                        >
-                    </div>
-                    <div>
-                        <span>Влажность</span><br /><b id="weather-humidity"
-                            >--</b
-                        >
-                    </div>
-                    <div><span>Г/м</span><br /><b id="weather-gm">--</b></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Модальное окно партнера -->
         <div class="modal-bg" id="modal-bg">
             <div class="modal-window" id="modal-window">
                 <span class="modal-close" id="modal-close">&times;</span>
                 <div class="modal-title" id="modal-title"></div>
                 <div class="modal-text" id="modal-text"></div>
-            </div>
-        </div>
-
-        <!-- QR-коды -->
-        <div class="qr-block">
-            <div class="qr-item">
-                <img src="./img/qr_telegram.png" alt="QR Telegram" />
-                <div class="qr-label">Телеграм-канал Альтаир</div>
-            </div>
-            <div class="qr-item">
-                <img src="./img/qr_calendar.png" alt="QR Календарь" />
-                <div class="qr-label">Календарь мероприятий</div>
             </div>
         </div>
         <script src="script.js"></script>
