@@ -4,216 +4,185 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
 }
-.main-bg {
-    min-height: 100vh;
+.container {
     width: 100vw;
+    min-height: 100vh;
     box-sizing: border-box;
-    padding: 32px 0 40px 0;
+    padding: 0;
+}
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    padding: 30px 3vw 10px 3vw;
+    gap: 40px;
 }
 
-.top-widget-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 3vw;
-    margin: 0 0 39px 0;
-    width: 100vw;
-    box-sizing: border-box;
-    padding: 0 0 0 1vw;
-}
-.main-title-card {
-    background: #fff;
-    border: 3px solid #4d92ed;
-    border-radius: 24px;
-    box-shadow: 0 4px 12px #b5c7ec33;
-    padding: 28px 38px;
-    min-width: 340px;
-    max-width: 36vw;
-    width: 36vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.main-title {
-    color: #2261b4;
-    font-size: 2.7vw;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-shadow: 0 2px 3px #eaf2ff;
-    white-space: nowrap;
-}
+.main-title-card,
 .date-widget-card {
     display: flex;
-    align-items: flex-start;
-    border-radius: 16px;
+    align-items: center;
+    justify-content: center;
     background: #fff;
-    border: 3.3px solid #aad3fa;
-    box-shadow: 0 2px 18px #cbeaff44;
-    min-width: 10vw;
-    max-width: 21vw;
-    height: 100px;
-    margin-top: 11px;
-    padding: 0 2vw;
+    border-radius: 24px;
+    min-height: 110px;
+    box-sizing: border-box;
+    /* синхронизированная высота и flex-basis */
 }
+.main-title-card {
+    border: 3px solid #4d92ed;
+    padding: 28px 38px;
+    font-size: 2.9vw;
+    font-weight: 800;
+    color: #2261b4;
+    flex: 2 1 0;
+}
+
+.date-widget-card {
+    border: 3px solid #aad3fa;
+    min-width: 240px;
+    max-width: 330px;
+    flex: 1 1 290px;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    min-height: 0;
+}
+
 .weekday-box {
     background: #e11a1a;
     color: #fff;
-    font-size: 2.5vw;
+    font-size: 2vw;
     font-weight: 700;
-    width: 82px;
-    height: 100px;
+    width: 61px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top-left-radius: 13px;
-    border-bottom-left-radius: 13px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
     letter-spacing: 2px;
 }
+
 .date-layout {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    padding: 11px 20px;
+    padding: 13px 20px;
+    flex: 1 1 0;
 }
+
 .fulldate {
-    font-size: 1.3vw;
+    font-size: 1.1vw;
     color: #2361b4;
     margin-bottom: 0;
     margin-top: 7px;
 }
 .bigtime {
     font-size: 2vw;
-    font-weight: 900;
+    font-weight: bold;
     color: #2c3e50;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
 }
 .studweek {
     color: #527cd2;
-    font-size: min(1.2vw, 19px);
+    font-size: min(1.02vw, 18px);
     margin-top: 0;
 }
 
-.wide-row {
-    display: flex;
-    flex-direction: row;
-    gap: 3vw;
-    align-items: flex-start;
-    width: 100vw;
-    box-sizing: border-box;
-    padding: 0 2vw;
-}
-.partners-card {
-    background: #fff;
-    border-radius: 25px;
-    min-width: 23vw;
-    max-width: 27vw;
-    width: 25vw;
-    box-shadow: 0 8px 32px #8db3e633;
-    border: 2.7px solid #bae1ff;
-    padding: 36px 28px 29px 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: none;
-}
-.partners-title {
-    color: #186bca;
-    font-size: 1.5vw;
-    font-weight: 800;
-    margin-bottom: 3vw;
-    text-align: center;
-    letter-spacing: 1px;
-    margin-top: 10px;
-}
 .partners-grid {
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2vw 1vw;
-    align-items: stretch;
-    justify-items: center;
+    gap: 22px;
+    width: 100%;
+    min-height: 260px;
 }
+
 .partner-cell {
     background: #f3faff;
     border: 2px solid #b3d9f7;
-    border-radius: 13px;
-    box-shadow: 0 3px 11px #6cabec19;
-    padding: 13px 8px 9px 8px;
-    min-width: 6vw;
-    min-height: 68px;
-    aspect-ratio: 1.4/1;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px #8db3e633;
+    min-width: 80px;
+    min-height: 80px;
+    aspect-ratio: 1/1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 7px;
     cursor: pointer;
-    transition: 0.14s cubic-bezier(0.67, -0.1, 0.36, 1.2);
-}
-.partner-cell:hover {
-    background: #eaf2fc;
-    border-color: #2261b4;
-}
-.partner-cell img {
-    max-width: 42px;
-    max-height: 36px;
-    margin-bottom: 4px;
-}
-.partner-name {
-    font-size: 1vw;
-    font-weight: 600;
-    color: #246ca8;
-    text-align: center;
+    transition: box-shadow 0.13s, border-color 0.12s;
+    overflow: hidden;
 }
 
-.right-widgets {
+.partner-cell img {
+    max-width: 54px;
+    max-height: 54px;
+    margin-bottom: 8px;
+    object-fit: contain;
+    display: block;
+}
+
+.partner-name {
+    font-size: 0.9em;
+    color: #176fae;
+    font-weight: 700;
+    line-height: 1.08;
+    text-align: center;
+    margin: 0;
+    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 372px;
-    max-width: 39vw;
-    width: 38vw;
+    width: 100%;
+    gap: 34px;
 }
 .weather-card {
-    background: #fff;
-    border: 2.7px solid #bae1ff;
-    border-radius: 25px;
-    box-shadow: 0 8px 32px #8db3e644;
     width: 100%;
-    max-width: 38vw;
-    min-width: 360px;
-    margin-bottom: 23px;
+    background: #fff;
+    border: 2.5px solid #bae1ff;
+    border-radius: 26px;
+    min-height: 260px;
+    box-shadow: 0 8Fpx 32px #b0dcfd44;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .weather-row {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 35px 4vw 10px 4vw;
+    padding: 34px 5vw 14px 5vw;
 }
 .weather-main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 120px;
+    min-width: 110px;
 }
 .weather-temp {
-    font-size: 2.7vw;
+    font-size: 3vw;
     color: #2476ce;
     font-weight: 900;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
 }
 .weather-feel {
-    font-size: 1.15vw;
+    font-size: 1.25vw;
     color: #4294e1;
-    margin-top: 0;
-    margin-bottom: 0;
 }
 .weather-desc {
-    font-size: 1.29vw;
+    font-size: 1.1vw;
     color: #2c3e50;
     font-weight: 500;
     margin-top: 4px;
@@ -226,68 +195,67 @@ body {
 }
 .side-small {
     color: #2261b4;
-    font-size: 1vw;
+    font-size: 1.07vw;
     font-weight: 800;
 }
 .weather-footer {
-    background: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 0 0 23px 23px;
+    border-radius: 0 0 14px 14px;
     font-size: 1vw;
     color: #2261b4;
     font-weight: 600;
-    letter-spacing: 0.2px;
-    padding: 1vw 4vw 1vw 4vw;
+    letter-spacing: 0.1px;
+    padding: 0.9vw 4vw 1vw 4vw;
+    background: #f7fafd;
 }
 .weather-footer div {
     text-align: center;
 }
 .weather-footer b {
-    font-size: 1vw;
+    font-size: 1.1vw;
     color: #3681df;
     font-weight: 800;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.1px;
 }
 
 .qr-codes-row {
     display: flex;
     flex-direction: row;
-    gap: 1.8vw;
-    justify-content: flex-start;
+    gap: 32px;
+    justify-content: center;
     align-items: flex-start;
     width: 100%;
-    margin-top: 2vw;
 }
 .qr-cell {
-    box-shadow: 0 3px 24px #b5dcfd3c;
+    box-shadow: 0 3px 18px #b0d9fd29;
     background: #f3fbff;
     border-radius: 13px;
     border: 2px solid #b3d9f7;
-    padding: 1vw 1vw 0.7vw 1vw;
+    padding: 25px 16px 13px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 111px;
+    min-width: 120px;
 }
 .qr-cell img {
-    width: 45px;
-    height: 45px;
-    margin-bottom: 3px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 7px;
 }
 .qr-label {
-    font-size: 0.87vw;
+    font-size: 1.12em;
     color: #2261b4;
     font-weight: bold;
     background: #ecf6ff;
     border-radius: 7px;
-    padding: 0.6vw 1vw;
+    padding: 3px 12px;
     margin-top: 3px;
     box-shadow: 0 1px 4px #b4d5f314;
 }
 
-/* ---- modal ---- */
+/* если используешь модалку */
 .modal-bg {
     display: none;
     position: fixed;

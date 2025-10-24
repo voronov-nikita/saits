@@ -6,12 +6,12 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <div class="main-bg">
-            <div class="top-widget-row">
-                <div class="main-title-card">
+        <div class="container">
+            <div class="top-row">
+                <div class="main-title-card" id="mainTitleCard">
                     <span class="main-title">Детский Технопарк "Альтаир"</span>
                 </div>
-                <div class="date-widget-card">
+                <div class="date-widget-card" id="dateWidgetCard">
                     <div class="weekday-box" id="weekday"></div>
                     <div class="date-layout">
                         <div class="fulldate" id="fulldate"></div>
@@ -23,61 +23,12 @@
                     </div>
                 </div>
             </div>
-            <div class="wide-row">
-                <div class="partners-card">
-                    <div class="partners-title">Индустриальные партнёры</div>
-                    <div class="partners-grid">
-                        <div class="partner-cell" data-partner="rostec">
-                            <img src="./img/partner_rostech.png" alt="Ростех" />
-                            <div class="partner-name">Ростех</div>
-                        </div>
-                        <div class="partner-cell" data-partner="1c">
-                            <img src="./img/partner_1c.png" alt="1C" />
-                            <div class="partner-name">1C</div>
-                        </div>
-                        <div class="partner-cell" data-partner="krok">
-                            <img src="./img/partner_krok.png" alt="КРОК" />
-                            <div class="partner-name">КРОК</div>
-                        </div>
-                        <div class="partner-cell" data-partner="astra">
-                            <img src="./img/partner_astra.png" alt="Астра" />
-                            <div class="partner-name">Астра</div>
-                        </div>
-                        <div class="partner-cell" data-partner="rosatom">
-                            <img
-                                src="./img/partner_rosatom.png"
-                                alt="Росатом"
-                            />
-                            <div class="partner-name">Росатом</div>
-                        </div>
-                        <div class="partner-cell" data-partner="yandex_lyceum">
-                            <img
-                                src="./img/partner_yandex_lyceum.png"
-                                alt="Яндекс Лицей"
-                            />
-                            <div class="partner-name">Яндекс Лицей</div>
-                        </div>
-                        <div class="partner-cell" data-partner="it_school">
-                            <img
-                                src="./img/partner_it_school.png"
-                                alt="IT Школа"
-                            />
-                            <div class="partner-name">IT Школа</div>
-                        </div>
-                        <div class="partner-cell" data-partner="solar">
-                            <img src="./img/partner_solar.png" alt="Солар" />
-                            <div class="partner-name">Солар</div>
-                        </div>
-                        <div class="partner-cell" data-partner="rostelecom">
-                            <img
-                                src="./img/partner_rostelecom.png"
-                                alt="Ростелеком"
-                            />
-                            <div class="partner-name">Ростелеком</div>
-                        </div>
-                    </div>
+            <div class="main-widgets">
+                <div class="partners-block">
+                    <div class="partners-title">Партнёры</div>
+                    <div class="partners-grid" id="partnersGrid"></div>
                 </div>
-                <div class="right-widgets">
+                <div class="info-block">
                     <div class="weather-card">
                         <div class="weather-row">
                             <div class="side-label">
@@ -123,9 +74,6 @@
                                     >--</b
                                 >
                             </div>
-                            <div>
-                                <span>Г/м</span><br /><b id="weather-gm">--</b>
-                            </div>
                         </div>
                     </div>
                     <div class="qr-codes-row">
@@ -147,6 +95,7 @@
                 </div>
             </div>
         </div>
+        <!-- Модальное окно партнера (если используешь) -->
         <div class="modal-bg" id="modal-bg">
             <div class="modal-window" id="modal-window">
                 <span class="modal-close" id="modal-close">&times;</span>

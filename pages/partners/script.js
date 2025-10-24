@@ -1,4 +1,159 @@
-// ------ Виджет даты/недели ------
+// ---- Высота блока даты = высоте блока с названием (с учетом padding!) ----
+function syncHeaderBlocks() {
+    const titleCard = document.getElementById("mainTitleCard");
+    const dateCard = document.getElementById("dateWidgetCard");
+    if (titleCard && dateCard) {
+        dateCard.style.minHeight = titleCard.offsetHeight + "px";
+        // сверху и снизу padding учитывается!
+    }
+}
+window.addEventListener("resize", syncHeaderBlocks);
+window.addEventListener("DOMContentLoaded", syncHeaderBlocks);
+
+// --- Карусель партнёров с боковой анимацией ---
+const partnersAll = [
+    {
+        src: "./img/partner_rostech.png",
+        alt: "Ростех",
+        name: "Ростех",
+        key: "rostec",
+    },
+    { src: "./img/partner_1c.png", alt: "1C", name: "1C", key: "1c" },
+    { src: "./img/partner_krok.png", alt: "КРОК", name: "КРОК", key: "krok" },
+    {
+        src: "./img/partner_astra.png",
+        alt: "Астра",
+        name: "Астра",
+        key: "astra",
+    },
+    {
+        src: "./img/Rosatom.jpg",
+        alt: "Росатом",
+        name: "Росатом",
+        key: "rosatom",
+    },
+    {
+        src: "./img/lyceum.png",
+        alt: "Яндекс Лицей",
+        name: "Яндекс Лицей",
+        key: "yandex_lyceum",
+    },
+    {
+        src: "./img/partner_it_school.png",
+        alt: "IT Школа",
+        name: "IT Школа",
+        key: "it_school",
+    },
+    {
+        src: "./img/partner_solar.png",
+        alt: "Солар",
+        name: "Солар",
+        key: "solar",
+    },
+    {
+        src: "./img/partner_rostelecom.png",
+        alt: "Ростелеком",
+        name: "Ростелеком",
+        key: "rostelecom",
+    },
+    // ... добавляй своих
+];
+
+let partnerCarouselIndex = 0,
+    animating = false;
+let prevArr = [];
+function renderPartnersGrid(animated = true, direction = "right") {
+    const grid = document.getElementById("partnersGrid");
+    if (!grid) return;
+    const N = partnersAll.length;
+    let start = partnerCarouselIndex;
+    let arr = [];
+    for (let i = 0; i < 9; ++i) arr.push(partnersAll[(start + i) % N]);
+
+    // делаем для slide effect
+    let newBlock = document.createElement("div");
+    newBlock.className = "partner-cells-slide";
+    arr.forEach((p) => {
+        const cell = document.createElement("div");
+        cell.className = "partner-cell";
+        cell.setAttribute("data-partner", p.key);
+        cell.innerHTML = `<img src="${p.src}" alt="${p.alt}" /><div class="partner-name">${p.name}</div>`;
+        newBlock.appendChild(cell);
+    });
+
+    // Если не первый рендер — делаем слайд-анимацию!
+    if (animated && grid.firstChild) {
+        let oldBlock = grid.firstChild;
+        newBlock.style.transform = `translateX(${
+            direction === "right" ? "100%" : "-100%"
+        })`;
+        grid.appendChild(newBlock);
+        setTimeout(() => {
+            oldBlock.style.transform = `translateX(${
+                direction === "right" ? "-100%" : "100%"
+            })`;
+            newBlock.style.transform = "translateX(0)";
+        }, 30);
+
+        setTimeout(() => {
+            if (grid.children.length > 1) grid.removeChild(grid.firstChild); // очищаем старый блок
+            bindPartnerModals(); // чтобы новые карточки были интерактивны
+        }, 600);
+    } else {
+        grid.innerHTML = "";
+        grid.appendChild(newBlock);
+        bindPartnerModals();
+    }
+    prevArr = arr;
+}
+function tickPartners() {
+    if (animating) return;
+    animating = true;
+    partnerCarouselIndex = (partnerCarouselIndex + 9) % partnersAll.length;
+    renderPartnersGrid(true, "right");
+    setTimeout(() => {
+        animating = false;
+    }, 650);
+}
+renderPartnersGrid(false);
+setInterval(tickPartners, 2200);
+
+// --- Модалки, описание компаний ---
+const partnersDescriptions = {
+    rostec: "Госкорпорация, развивающая высокотехнологичные отрасли в России.",
+    "1c": "Экосистема ИТ-решений для бизнеса, образования и учёта.",
+    krok: "Крупный ИТ-интегратор и поставщик облачных платформ.",
+    astra: "Российский разработчик системы Astra Linux.",
+    rosatom: "Госкорпорация по атомной энергии, лидер инноваций.",
+    yandex_lyceum: "Проект Яндекса для обучения школьников программированию.",
+    it_school: "Образовательная инициатива Samsung для ИТ-обучения.",
+    solar: "Эксперт в кибербезопасности, цифровой защите.",
+    rostelecom: "Национальный оператор связи, интернет и цифровые платформы.",
+};
+function bindPartnerModals() {
+    document.querySelectorAll(".partner-cell").forEach((el) => {
+        el.onclick = () => {
+            const key = el.getAttribute("data-partner");
+            document.getElementById("modal-title").textContent =
+                el.querySelector(".partner-name").textContent;
+            document.getElementById("modal-text").textContent =
+                partnersDescriptions[key] || "Нет описания.";
+            document.getElementById("modal-bg").style.display = "flex";
+        };
+    });
+}
+bindPartnerModals();
+
+document.getElementById("modal-close").onclick = () => {
+    document.getElementById("modal-bg").style.display = "none";
+};
+document.getElementById("modal-bg").onclick = (e) => {
+    if (e.target === document.getElementById("modal-bg")) {
+        document.getElementById("modal-bg").style.display = "none";
+    }
+};
+
+// --- Виджет даты, времени и недели ---
 function leading0(n) {
     return n < 10 ? "0" + n : n;
 }
@@ -38,13 +193,15 @@ function updateDateWidget() {
     })}`;
     document.getElementById("weeknumber").textContent = getStudyWeek(now);
     document.getElementById("schedule").textContent = "Перерыв";
+    setTimeout(syncHeaderBlocks, 100); // обязательно чуть позже для высоты
 }
 setInterval(updateDateWidget, 1000);
 updateDateWidget();
 
-// ------ Погодный виджет из OpenWeatherMap ------
-const API_KEY = "1df2eb92e9b510458f1e2edebaace0eb"; // замените на свой ключ
+// ---- Динамическая погода (оставь свою реализацию)
+const API_KEY = "1df2eb92e9b510458f1e2edebaace0eb"; // вставь свой API-ключ!
 const CITY = "Moscow";
+
 function fetchWeather() {
     fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=metric&lang=ru&appid=${API_KEY}`
@@ -76,7 +233,6 @@ function fetchWeather() {
             document.getElementById("weather-humidity").textContent = data.main
                 ? `${data.main.humidity}%`
                 : "--";
-            document.getElementById("weather-gm").textContent = "--";
             function formatTime(ts) {
                 if (!ts) return "--:--";
                 const date = new Date(ts * 1000);
@@ -87,10 +243,10 @@ function fetchWeather() {
                 );
             }
             document.getElementById("sunrise").textContent = formatTime(
-                data.sys && data.sys.sunrise ? data.sys.sunrise : undefined
+                data.sys && data.sys.sunrise
             );
             document.getElementById("sunset").textContent = formatTime(
-                data.sys && data.sys.sunset ? data.sys.sunset : undefined
+                data.sys && data.sys.sunset
             );
         })
         .catch(() => {
@@ -107,36 +263,3 @@ function fetchWeather() {
 }
 fetchWeather();
 setInterval(fetchWeather, 600000);
-
-// ------ Модальное описание партнера ------
-const partnersDescriptions = {
-    rostec: "Государственная корпорация, развивающая промышленность и технологии.",
-    "1c": "Разработчик программного обеспечения для бизнеса, учёта и автоматизации.",
-    krok: "IT-интегратор, решения для бизнеса, инфраструктуры и облаков.",
-    astra: "Российские операционные системы и корпоративное ПО.",
-    rosatom: "Лидер атомной отрасли, инновации в энергетике.",
-    yandex_lyceum: "Образовательная платформа Яндекса для школьников.",
-    it_school: "Школа Samsung — обучение программированию и IT.",
-    solar: "Кибербезопасность и решения для защиты данных.",
-    rostelecom: "Крупнейший российский телеком-оператор и цифровые сервисы.",
-};
-
-document.querySelectorAll(".partner-card").forEach((el) => {
-    el.addEventListener("click", () => {
-        const id = el.getAttribute("data-partner");
-        document.getElementById("modal-title").textContent =
-            el.querySelector(".partner-name").textContent;
-        document.getElementById("modal-text").textContent =
-            partnersDescriptions[id] || "";
-        document.getElementById("modal-bg").style.display = "flex";
-    });
-});
-// Закрытие модалки
-document.getElementById("modal-close").onclick = () => {
-    document.getElementById("modal-bg").style.display = "none";
-};
-document.getElementById("modal-bg").onclick = (e) => {
-    if (e.target === document.getElementById("modal-bg")) {
-        document.getElementById("modal-bg").style.display = "none";
-    }
-};
