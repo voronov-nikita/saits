@@ -12,22 +12,20 @@
                     <span class="main-title">Детский Технопарк "Альтаир"</span>
                 </div>
                 <div class="date-widget-card" id="dateWidgetCard">
-                    <div class="weekday-box" id="weekday"></div>
+                    <div class="weekday-box" id="weekday">ПН</div>
                     <div class="date-layout">
-                        <div class="fulldate" id="fulldate"></div>
-                        <div class="bigtime" id="time"></div>
-                        <div class="studweek">
-                            <span id="weeknumber"></span> неделя<br />
-                            <span id="schedule">Перерыв</span>
-                        </div>
+                        <div class="fulldate" id="fulldate">25 октября</div>
+                        <div class="bigtime" id="time">13:03</div>
                     </div>
                 </div>
             </div>
+
             <div class="main-widgets">
                 <div class="partners-block">
                     <div class="partners-title">Партнёры</div>
                     <div class="partners-grid" id="partnersGrid"></div>
                 </div>
+
                 <div class="info-block">
                     <div class="weather-card">
                         <div class="weather-row">
@@ -76,17 +74,18 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="qr-codes-row">
                         <div class="qr-cell">
                             <img
-                                src="./img/qr_telegram.png"
+                                src="./img/QR-code-altair.png"
                                 alt="QR Telegram"
                             />
-                            <div class="qr-label">Телеграм-канал Альтаир</div>
+                            <div class="qr-label">Телеграм канал Детского Технопарка "Альтаир"</div>
                         </div>
                         <div class="qr-cell">
                             <img
-                                src="./img/qr_calendar.png"
+                                src="./img/QR-priem.png"
                                 alt="QR Календарь"
                             />
                             <div class="qr-label">Календарь мероприятий</div>
@@ -95,14 +94,15 @@
                 </div>
             </div>
         </div>
-        <!-- Модальное окно партнера (если используешь) -->
+
         <div class="modal-bg" id="modal-bg">
-            <div class="modal-window" id="modal-window">
+            <div class="modal-window">
                 <span class="modal-close" id="modal-close">&times;</span>
                 <div class="modal-title" id="modal-title"></div>
                 <div class="modal-text" id="modal-text"></div>
             </div>
         </div>
+
         <script src="script.js"></script>
     </body>
 </html>
