@@ -2,23 +2,27 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-        sans-serif;
-    /* Основной плавный градиент */
-    background: radial-gradient(
-            circle at 70% 20%,
-            #6acefa 0 20%,
-            transparent 70%
-        ),
-        radial-gradient(circle at 30% 80%, #4587ff 0 30%, transparent 80%),
-        radial-gradient(circle at 15% 50%, #2343a8 0 15%, transparent 70%),
-        linear-gradient(120deg, #f4f9ff 0%, #bee3fd 100%);
-    /* Можно добавить плавность через фильтр-размытие для всей страницы (опционально) */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: linear-gradient(to left, #4d97b792, #37ceb090, #2399a897);
+    background-size: 400% 100%;
+    animation: gradientMove 60s ease infinite;
     filter: blur(0.5px);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 
 .container {
     width: 100vw;
@@ -54,6 +58,15 @@ body {
     color: #2261b4;
     flex: 2 1 0;
     justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.main-logo {
+    width: 102px;
+    height: 102px;
+    object-fit: contain;
 }
 
 .date-widget-card {
@@ -66,7 +79,7 @@ body {
 }
 
 .weekday-box {
-    background: #e11a1a;
+    background: #730d0d;
     color: #fff;
     font-size: 2vw;
     font-weight: 700;
@@ -117,9 +130,8 @@ body {
 }
 
 .partners-block {
-    background: #ffffff9c;
     border-radius: 26px;
-    box-shadow: 0 8px 32px #b0dcfd2c;
+    box-shadow: 0 8px 32px #b0dcfd1f;
     border: 2.7px solid #2c5589;
     padding: 32px 26px 28px 26px;
     display: flex;
@@ -128,7 +140,7 @@ body {
 }
 
 .partners-title {
-    color: #083068;
+    color: #0d499c;
     font-size: 2.9vw;
     font-weight: bold;
     margin-bottom: 30px;
@@ -144,7 +156,7 @@ body {
 }
 
 .partner-cell {
-    background: #f3faff;
+    background: rgba(255, 255, 255, 0.6);
     border: 2px solid #b3d9f7;
     border-radius: 15px;
     box-shadow: 0 3px 12px #8db3e633;
@@ -359,6 +371,21 @@ body {
     user-select: none;
     white-space: nowrap;
     animation: moveWord 9s linear infinite;
+}
+
+.qr-cell,
+.weather-footer,
+.main-title-card,
+.date-widget-card,
+.partners-block,
+.weather-card {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    color: #dcbd21;
 }
 
 @keyframes moveWord {

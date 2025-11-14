@@ -1,6 +1,6 @@
 // bgwords.js
 
-const BG_WORD = "Альтаир"; // Слово для фона
+const BG_WORD = ""; // Слово для фона
 const ROWS = 7;              // Сколько рядов вертикально
 const COLS = 5;              // Сколько слов в ряду
 const WORD_SIZE = 4.5;       // Средний размер, vw
