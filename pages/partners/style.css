@@ -179,8 +179,8 @@ body {
 }
 
 .partner-cell img {
-    max-width: 90px;
-    max-height: 90px;
+    max-width: 120px;
+    max-height: 120px;
     margin-bottom: 8px;
     object-fit: contain;
 }
@@ -199,8 +199,9 @@ body {
 
 .info-block {
     display: flex;
-    flex-direction: column;
-    gap: 34px;
+    gap: 30px;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .weather-card {
@@ -208,6 +209,8 @@ body {
     border: 2.5px solid #2c5589;
     border-radius: 26px;
     box-shadow: 0 8px 32px #b0dcfd44;
+    max-width: 70%;
+    height: 60%;
 }
 
 .weather-row {
@@ -232,8 +235,11 @@ body {
 }
 
 .weather-feel {
-    font-size: 1.25vw;
+    font-size: 1vw;
+    width: 200%;
     color: #4294e1;
+    text-align: center;
+    margin-bottom: 5px;
 }
 .weather-desc {
     font-size: 1.1vw;
@@ -241,12 +247,22 @@ body {
     font-weight: 500;
     margin-top: 4px;
 }
-.side-label {
+.side-label{
     color: #2767af;
     font-size: 1vw;
     font-weight: 600;
     text-align: center;
+    
 }
+
+#sunset{
+    margin-left: 60px;
+}
+
+#sunrise{
+    margin-right: 30px;
+}
+
 .side-small {
     color: #2261b4;
     font-size: 1.07vw;
@@ -260,9 +276,10 @@ body {
     border-radius: 0 0 23px 23px;
     font-size: 1vw;
     color: #2261b4;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.9vw 4vw 1vw 4vw;
     background: #f3faff;
+    gap: 30px;
 }
 
 .weather-footer div {
@@ -278,6 +295,8 @@ body {
     display: flex;
     gap: 32px;
     justify-content: center;
+    margin-top: -20px;
+    align-items: right;
 }
 
 .qr-cell {
@@ -290,12 +309,20 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-width: 120px;
+    width: auto;
+    height: auto;
+    
+    min-height: 80px;
+    max-height: 200px;
+
+    min-width: 100px;
+    max-width: 200px;
+    margin: 7px;
 }
 
 .qr-cell img {
-    width: 128px;
-    height: 128px;
+    width: 100px;
+    height: 100px;
     margin-bottom: 7px;
 }
 
