@@ -1,14 +1,3 @@
-// Синхронизация высоты
-function syncHeaderBlocks() {
-    const titleCard = document.getElementById("mainTitleCard");
-    const dateCard = document.getElementById("dateWidgetCard");
-    if (titleCard && dateCard) {
-        dateCard.style.minHeight = titleCard.offsetHeight + "px";
-    }
-}
-window.addEventListener("resize", syncHeaderBlocks);
-window.addEventListener("DOMContentLoaded", syncHeaderBlocks);
-
 // Партнёры
 const partnersAll = [
     {
@@ -76,24 +65,50 @@ const partnersDescriptions = {
 };
 
 let partnerIndex = 0;
-function renderPartners() {
-    const grid = document.getElementById("partnersGrid");
-    if (!grid) return;
-    grid.innerHTML = "";
-    const N = partnersAll.length;
-    for (let i = 0; i < 6; i++) {
-        const p = partnersAll[(partnerIndex + i) % N];
+const visibleCount = 3;
+
+function renderCarousel() {
+    const track = document.getElementById("carouselTrack");
+    if (!track) return;
+    track.innerHTML = "";
+    for (let i = 0; i < visibleCount; i++) {
+        const idx = (partnerIndex + i) % partnersAll.length;
+        const p = partnersAll[idx];
         const cell = document.createElement("div");
-        cell.className = "partner-cell";
+        cell.className = "carousel-partner";
         cell.setAttribute("data-partner", p.key);
         cell.innerHTML = `<img src="${p.src}" alt="${p.alt}"><div class="partner-name">${p.name}</div>`;
-        grid.appendChild(cell);
+        track.appendChild(cell);
     }
     bindModals();
 }
 
+function nextSlide() {
+    partnerIndex = (partnerIndex + 1) % partnersAll.length;
+    slideCarousel();
+}
+
+function slideCarousel() {
+    const track = document.getElementById("carouselTrack");
+    if (track) {
+        track.style.transform = "translateX(-124px)";
+        setTimeout(() => {
+            track.style.transition = "none";
+            track.style.transform = "translateX(0)";
+            renderCarousel();
+            setTimeout(() => {
+                track.style.transition = "";
+            }, 30);
+        }, 700);
+    }
+}
+
+setInterval(nextSlide, 2900);
+renderCarousel();
+
+// --- модальное окно ---
 function bindModals() {
-    document.querySelectorAll(".partner-cell").forEach((el) => {
+    document.querySelectorAll(".carousel-partner").forEach((el) => {
         el.onclick = () => {
             const key = el.getAttribute("data-partner");
             document.getElementById("modal-title").textContent =
@@ -104,7 +119,6 @@ function bindModals() {
         };
     });
 }
-
 document.getElementById("modal-close").onclick = () => {
     document.getElementById("modal-bg").style.display = "none";
 };
@@ -114,107 +128,5 @@ document.getElementById("modal-bg").onclick = (e) => {
     }
 };
 
-renderPartners();
-setInterval(() => {
-    partnerIndex = (partnerIndex + 6) % partnersAll.length;
-    renderPartners();
-}, 3000);
-
-// Дата/время
-function leading0(n) {
-    return n < 10 ? "0" + n : n;
-}
-function getRuWeekday(d) {
-    return ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"][d.getDay()];
-}
-function getStudyWeek(now) {
-    let year = now.getFullYear(),
-        startMonth,
-        startYear;
-    if (now.getMonth() + 1 >= 9) {
-        startMonth = 8;
-        startYear = year;
-    } else if (now.getMonth() + 1 >= 2) {
-        startMonth = 1;
-        startYear = year;
-    } else {
-        startMonth = 8;
-        startYear = year - 1;
-    }
-    let start = new Date(startYear, startMonth, 1);
-    while (start.getDay() !== 1) start.setDate(start.getDate() + 1);
-    let diff = now - start;
-    let weekNum = Math.floor(diff / (1000 * 60 * 60 * 24 * 7)) + 1;
-    return weekNum < 1 ? 1 : weekNum;
-}
-
-function updateDateTime() {
-    const now = new Date();
-    document.getElementById("weekday").textContent = getRuWeekday(now);
-    document.getElementById("time").textContent = `${leading0(
-        now.getHours()
-    )}:${leading0(now.getMinutes())}`;
-    document.getElementById(
-        "fulldate"
-    ).textContent = `${now.getDate()} ${now.toLocaleString("ru-RU", {
-        month: "long",
-    })}`;
-    setTimeout(syncHeaderBlocks, 50);
-}
-setInterval(updateDateTime, 1000);
-updateDateTime();
-
-// Погода
-const API_KEY = "1df2eb92e9b510458f1e2edebaace0eb";
-const CITY = "Moscow";
-
-function fetchWeather() {
-    fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=metric&lang=ru&appid=${API_KEY}`
-    )
-        .then((r) => r.json())
-        .then((data) => {
-            document.getElementById("weather-temp").textContent = data.main
-                ? data.main.temp > 0
-                    ? `+${Math.round(data.main.temp)}`
-                    : `${Math.round(data.main.temp)}`
-                : "--";
-            document.getElementById("weather-feel").textContent = data.main
-                ? `По ощущению ${
-                      data.main.feels_like > 0 ? "+" : ""
-                  }${Math.round(data.main.feels_like)}`
-                : "";
-            document.getElementById("weather-desc").textContent = data
-                .weather?.[0]
-                ? data.weather[0].description[0].toUpperCase() +
-                  data.weather[0].description.slice(1)
-                : "";
-            document.getElementById("weather-wind").textContent = data.wind
-                ? `${data.wind.speed} м/с`
-                : "--";
-            document.getElementById("weather-pressure").textContent = data.main
-                ? `${Math.round(data.main.pressure * 0.750062)} мм рт. ст.`
-                : "--";
-            document.getElementById("weather-humidity").textContent = data.main
-                ? `${data.main.humidity}%`
-                : "--";
-            const formatTime = (ts) => {
-                if (!ts) return "--:--";
-                const d = new Date(ts * 1000);
-                return leading0(d.getHours()) + ":" + leading0(d.getMinutes());
-            };
-            document.getElementById("sunrise").textContent = formatTime(
-                data.sys?.sunrise
-            );
-            document.getElementById("sunset").textContent = formatTime(
-                data.sys?.sunset
-            );
-        })
-        .catch(() => {
-            document.getElementById("weather-temp").textContent = "--";
-            document.getElementById("weather-feel").textContent = "";
-            document.getElementById("weather-desc").textContent = "";
-        });
-}
-fetchWeather();
-setInterval(fetchWeather, 600000);
+// --- ваши блоки для даты и погоды ---
+// (оставьте свой скрипт, он полностью подходит)

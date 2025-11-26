@@ -1,3 +1,58 @@
+.partners-carousel {
+    width: 360px;
+    height: 140px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto 22px auto;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.72, 0.43, 0.63, 1.03);
+    will-change: transform;
+    height: 140px;
+}
+
+.carousel-partner {
+    background: #f3faff;
+    border: 2px solid #b3d9f7;
+    border-radius: 15px;
+    min-width: 110px;
+    max-width: 110px;
+    height: 124px;
+    margin: 0 14px;
+    box-shadow: 0 3px 12px #8db3e633;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.carousel-partner img {
+    max-width: 74px;
+    max-height: 74px;
+    margin-bottom: 5px;
+    object-fit: contain;
+}
+.carousel-partner .partner-name {
+    font-size: 0.82em;
+    color: #176fae;
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.carousel-partner:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px #8db3e666;
+    border-color: #2261b4;
+}
+
 body {
     background: #f9fbff;
     margin: 0;
