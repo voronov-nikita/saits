@@ -54,11 +54,30 @@
 }
 
 body {
-    background: #f9fbff;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: linear-gradient(to left, #4d97b792, #37ceb090, #2399a897);
+    background-size: 400% 100%;
+    animation: gradientMove 60s ease infinite;
+    filter: blur(0.5px);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 
 .container {
     width: 100vw;
@@ -81,23 +100,32 @@ body {
 .date-widget-card {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: #f3faff;
     border-radius: 24px;
     box-sizing: border-box;
 }
 
 .main-title-card {
-    border: 3px solid #4d92ed;
+    border: 3px solid #2c5589;
     padding: 28px 38px;
     font-size: 2.9vw;
     font-weight: 800;
     color: #2261b4;
     flex: 2 1 0;
     justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.main-logo {
+    width: 102px;
+    height: 102px;
+    object-fit: contain;
 }
 
 .date-widget-card {
-    border: 3px solid #aad3fa;
+    border: 3px solid #2c5589;
     min-width: 240px;
     max-width: 330px;
     flex: 1 1 290px;
@@ -106,11 +134,11 @@ body {
 }
 
 .weekday-box {
-    background: #e11a1a;
+    background: #730d0d;
     color: #fff;
     font-size: 2vw;
     font-weight: 700;
-    width: 61px;
+    width: 4vw;
     height: 100%;
     display: flex;
     align-items: center;
@@ -141,7 +169,7 @@ body {
     margin-bottom: 2px;
 }
 .studweek {
-    color: #527cd2;
+    color: #2c5589;
     font-size: min(1.02vw, 18px);
     margin-top: 2px;
 }
@@ -157,10 +185,9 @@ body {
 }
 
 .partners-block {
-    background: #fff;
     border-radius: 26px;
-    box-shadow: 0 8px 32px #b0dcfd2c;
-    border: 2.7px solid #bae1ff;
+    box-shadow: 0 8px 32px #b0dcfd1f;
+    border: 2.7px solid #2c5589;
     padding: 32px 26px 28px 26px;
     display: flex;
     flex-direction: column;
@@ -168,8 +195,8 @@ body {
 }
 
 .partners-title {
-    color: #146eeb;
-    font-size: 1.9vw;
+    color: #0d499c;
+    font-size: 2.9vw;
     font-weight: bold;
     margin-bottom: 30px;
     text-align: center;
@@ -184,7 +211,7 @@ body {
 }
 
 .partner-cell {
-    background: #f3faff;
+    background: rgba(255, 255, 255, 0.6);
     border: 2px solid #b3d9f7;
     border-radius: 15px;
     box-shadow: 0 3px 12px #8db3e633;
@@ -203,12 +230,12 @@ body {
 .partner-cell:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 18px #8db3e666;
-    border-color: #2261b4;
+    border-color: #2c5589;
 }
 
 .partner-cell img {
-    max-width: 90px;
-    max-height: 90px;
+    max-width: 120px;
+    max-height: 120px;
     margin-bottom: 8px;
     object-fit: contain;
 }
@@ -227,15 +254,18 @@ body {
 
 .info-block {
     display: flex;
-    flex-direction: column;
-    gap: 34px;
+    gap: 30px;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .weather-card {
-    background: #fff;
-    border: 2.5px solid #bae1ff;
+    background: #f3faff;
+    border: 2.5px solid #2c5589;
     border-radius: 26px;
     box-shadow: 0 8px 32px #b0dcfd44;
+    max-width: 70%;
+    height: 60%;
 }
 
 .weather-row {
@@ -260,8 +290,11 @@ body {
 }
 
 .weather-feel {
-    font-size: 1.25vw;
+    font-size: 1vw;
+    width: 200%;
     color: #4294e1;
+    text-align: center;
+    margin-bottom: 5px;
 }
 .weather-desc {
     font-size: 1.1vw;
@@ -269,12 +302,22 @@ body {
     font-weight: 500;
     margin-top: 4px;
 }
-.side-label {
+.side-label{
     color: #2767af;
     font-size: 1vw;
     font-weight: 600;
     text-align: center;
+    
 }
+
+#sunset{
+    margin-left: 60px;
+}
+
+#sunrise{
+    margin-right: 30px;
+}
+
 .side-small {
     color: #2261b4;
     font-size: 1.07vw;
@@ -288,9 +331,10 @@ body {
     border-radius: 0 0 23px 23px;
     font-size: 1vw;
     color: #2261b4;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.9vw 4vw 1vw 4vw;
-    background: #f7fafd;
+    background: #f3faff;
+    gap: 30px;
 }
 
 .weather-footer div {
@@ -306,24 +350,34 @@ body {
     display: flex;
     gap: 32px;
     justify-content: center;
+    margin-top: -20px;
+    align-items: right;
 }
 
 .qr-cell {
     box-shadow: 0 3px 18px #b0d9fd29;
-    background: #f3fbff;
+    background: #f3faff;
     border-radius: 13px;
-    border: 2px solid #b3d9f7;
+    border: 2px solid #2c5589;
     padding: 25px 16px 13px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-width: 120px;
+    width: auto;
+    height: auto;
+    
+    min-height: 80px;
+    max-height: 200px;
+
+    min-width: 100px;
+    max-width: 200px;
+    margin: 7px;
 }
 
 .qr-cell img {
-    width: 128px;
-    height: 128px;
+    width: 100px;
+    height: 100px;
     margin-bottom: 7px;
 }
 
@@ -331,7 +385,7 @@ body {
     font-size: 1.12em;
     color: #2261b4;
     font-weight: bold;
-    background: #ecf6ff;
+    background: #f3faff;
     border-radius: 7px;
     padding: 3px 12px;
     margin-top: 3px;
@@ -344,14 +398,14 @@ body {
     top: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(40, 60, 90, 0.3);
+    background: f3faff;
     z-index: 2000;
     align-items: center;
     justify-content: center;
 }
 
 .modal-window {
-    background: #fff;
+    background: #f3faff;
     border-radius: 18px;
     max-width: 400px;
     padding: 30px 24px 18px;
@@ -378,4 +432,49 @@ body {
     font-size: 14px;
     color: #333;
     line-height: 1.5;
+}
+
+.bg-words {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -100;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bg-word {
+    position: absolute;
+    width: auto;
+    font-weight: 900;
+    color: #2a74c5;
+    user-select: none;
+    white-space: nowrap;
+    animation: moveWord 9s linear infinite;
+}
+
+.qr-cell,
+.weather-footer,
+.main-title-card,
+.date-widget-card,
+.partners-block,
+.weather-card {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    color: #dcbd21;
+}
+
+@keyframes moveWord {
+    from {
+        top: var(--start-top, -20vh);
+    }
+    to {
+        top: 110vh;
+    }
 }
