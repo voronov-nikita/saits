@@ -1,3 +1,14 @@
+let partnerIndex = 0;
+
+function renderCarousel() {
+    const track = document.getElementById("partnersTrack");
+    if (!track) return;
+    track.querySelectorAll('.partner-cell').forEach((cell, i) => {
+        cell.style.opacity = i === partnerIndex ? '1' : '0.3';
+    });
+}
+
+
 function syncHeaderBlocks() {
     const titleCard = document.getElementById("mainTitleCard");
     const dateCard = document.querySelector(".weather-time-wrapper");
@@ -74,7 +85,7 @@ function buildPartnersTrack() {
     const track = document.getElementById("partnersTrack");
     if (!track) return;
 
-    track.innerHTML = "";
+    track.innerHTML = ""; // Очищаем
 
     partnersAll.forEach((p) => {
         const cell = document.createElement("div");
@@ -87,13 +98,10 @@ function buildPartnersTrack() {
         track.appendChild(cell);
     });
 
-    const clone = track.cloneNode(true);
-    clone.id = "";
-    clone.classList.add("partners-track");
-    track.parentElement.appendChild(clone);
-
+    // ДУБЛИРОВАНИЕ УДАЛЕНО - только одна строка
     bindModals();
 }
+
 
 buildPartnersTrack();
 
