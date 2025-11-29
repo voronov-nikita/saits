@@ -33,8 +33,32 @@ const partnersDescriptions = {
     rostelecom: "Национальный оператор связи, интернет и цифровые платформы."
 };
 
+function nextSlide() {
+    partnerIndex = (partnerIndex + 1) % partnersAll.length;
+    slideCarousel();
+}
+
+function slideCarousel() {
+    const track = document.getElementById("carouselTrack");
+    if (track) {
+        track.style.transform = "translateX(-124px)";
+        setTimeout(() => {
+            track.style.transition = "none";
+            track.style.transform = "translateX(0)";
+            renderCarousel();
+            setTimeout(() => {
+                track.style.transition = "";
+            }, 30);
+        }, 700);
+    }
+}
+
+setInterval(nextSlide, 2900);
+renderCarousel();
+
+// --- модальное окно ---
 function bindModals() {
-    document.querySelectorAll(".partner-cell").forEach((el) => {
+    document.querySelectorAll(".carousel-partner").forEach((el) => {
         el.onclick = () => {
             const key = el.getAttribute("data-partner");
             document.getElementById("modal-title").textContent =
