@@ -1,7 +1,6 @@
-// Синхронизация высоты
 function syncHeaderBlocks() {
     const titleCard = document.getElementById("mainTitleCard");
-    const dateCard = document.getElementById("dateWidgetCard");
+    const dateCard = document.querySelector(".weather-time-wrapper");
     if (titleCard && dateCard) {
         dateCard.style.minHeight = titleCard.offsetHeight + "px";
     }
@@ -9,58 +8,17 @@ function syncHeaderBlocks() {
 window.addEventListener("resize", syncHeaderBlocks);
 window.addEventListener("DOMContentLoaded", syncHeaderBlocks);
 
-// Партнёры
 const partnersAll = [
-    {
-        src: "./img/Rostec.png",
-        alt: "Ростех",
-        name: "Ростех",
-        key: "rostec",
-    },
-    { src: "./img/1С.jpg", alt: "1C", name: "1C", key: "1c" },
-    { src: "./img/CROC.png", alt: "КРОК", name: "КРОК", key: "krok" },
-    {
-        src: "./img/astra.png",
-        alt: "Астра",
-        name: "Астра",
-        key: "astra",
-    },
-    {
-        src: "./img/Rosatom.png",
-        alt: "Росатом",
-        name: "Росатом",
-        key: "rosatom",
-    },
-    {
-        src: "./img/lyceum.png",
-        alt: "Яндекс Лицей",
-        name: "Яндекс Лицей",
-        key: "yandex_lyceum",
-    },
-    {
-        src: "./img/SAMSUNG.png",
-        alt: "IT Школа",
-        name: "IT Школа",
-        key: "it_school",
-    },
-    {
-        src: "./img/Solar.png",
-        alt: "Солар",
-        name: "Солар",
-        key: "solar",
-    },
-    {
-        src: "./img/ROSTELECOM.png",
-        alt: "Ростелеком",
-        name: "Ростелеком",
-        key: "rostelecom",
-    },
-    {
-        src: "./img/roscosmos.png",
-        alt: "Роскосмос",
-        name: "Роскосмос",
-        key: "rosspace",
-    },
+    { src: "./img/partners/Rostec.png", alt: "Ростех", name: "Ростех", key: "rostec" },
+    { src: "./img/partners/1С.jpg", alt: "1C", name: "1C", key: "1c" },
+    { src: "./img/partners/CROC.png", alt: "КРОК", name: "КРОК", key: "krok" },
+    { src: "./img/partners/astra.png", alt: "Астра", name: "Астра", key: "astra" },
+    { src: "./img/partners/Rosatom.png", alt: "Росатом", name: "Росатом", key: "rosatom" },
+    { src: "./img/partners/lyceum.png", alt: "Яндекс Лицей", name: "Яндекс Лицей", key: "yandex_lyceum" },
+    { src: "./img/partners/SAMSUNG.png", alt: "IT Школа", name: "IT Школа", key: "it_school" },
+    { src: "./img/partners/Solar.png", alt: "Солар", name: "Солар", key: "solar" },
+    { src: "./img/partners/ROSTELECOM.png", alt: "Ростелеком", name: "Ростелеком", key: "rostelecom" },
+    { src: "./img/partners/roscosmos.png", alt: "Роскосмос", name: "Роскосмос", key: "rosspace" }
 ];
 
 const partnersDescriptions = {
@@ -71,26 +29,9 @@ const partnersDescriptions = {
     rosatom: "Госкорпорация по атомной энергии, лидер инноваций.",
     yandex_lyceum: "Проект Яндекса для обучения школьников программированию.",
     it_school: "Образовательная инициатива Samsung для ИТ-обучения.",
-    solar: "Эксперт в кибербезопасности, цифровой защите.",
-    rostelecom: "Национальный оператор связи, интернет и цифровые платформы.",
+    solar: "Эксперт в кибербезопасности и цифровой защите.",
+    rostelecom: "Национальный оператор связи, интернет и цифровые платформы."
 };
-
-let partnerIndex = 0;
-function renderPartners() {
-    const grid = document.getElementById("partnersGrid");
-    if (!grid) return;
-    grid.innerHTML = "";
-    const N = partnersAll.length;
-    for (let i = 0; i < 6; i++) {
-        const p = partnersAll[(partnerIndex + i) % N];
-        const cell = document.createElement("div");
-        cell.className = "partner-cell";
-        cell.setAttribute("data-partner", p.key);
-        cell.innerHTML = `<img src="${p.src}" alt="${p.alt}"><div class="partner-name">${p.name}</div>`;
-        grid.appendChild(cell);
-    }
-    bindModals();
-}
 
 function bindModals() {
     document.querySelectorAll(".partner-cell").forEach((el) => {
@@ -105,6 +46,33 @@ function bindModals() {
     });
 }
 
+function buildPartnersTrack() {
+    const track = document.getElementById("partnersTrack");
+    if (!track) return;
+
+    track.innerHTML = "";
+
+    partnersAll.forEach((p) => {
+        const cell = document.createElement("div");
+        cell.className = "partner-cell";
+        cell.setAttribute("data-partner", p.key);
+        cell.innerHTML = `
+            <img src="${p.src}" alt="${p.alt}">
+            <div class="partner-name">${p.name}</div>
+        `;
+        track.appendChild(cell);
+    });
+
+    const clone = track.cloneNode(true);
+    clone.id = "";
+    clone.classList.add("partners-track");
+    track.parentElement.appendChild(clone);
+
+    bindModals();
+}
+
+buildPartnersTrack();
+
 document.getElementById("modal-close").onclick = () => {
     document.getElementById("modal-bg").style.display = "none";
 };
@@ -114,57 +82,43 @@ document.getElementById("modal-bg").onclick = (e) => {
     }
 };
 
-renderPartners();
-setInterval(() => {
-    partnerIndex = (partnerIndex + 6) % partnersAll.length;
-    renderPartners();
-}, 3000);
-
-// Дата/время
 function leading0(n) {
     return n < 10 ? "0" + n : n;
 }
-function getRuWeekday(d) {
-    return ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"][d.getDay()];
+
+function getRuWeekdayFull(d) {
+    return ["воскресенье", "понедельник", "вторник", "среда",
+        "четверг", "пятница", "суббота"][d.getDay()];
 }
-function getStudyWeek(now) {
-    let year = now.getFullYear(),
-        startMonth,
-        startYear;
-    if (now.getMonth() + 1 >= 9) {
-        startMonth = 8;
-        startYear = year;
-    } else if (now.getMonth() + 1 >= 2) {
-        startMonth = 1;
-        startYear = year;
-    } else {
-        startMonth = 8;
-        startYear = year - 1;
-    }
-    let start = new Date(startYear, startMonth, 1);
-    while (start.getDay() !== 1) start.setDate(start.getDate() + 1);
-    let diff = now - start;
-    let weekNum = Math.floor(diff / (1000 * 60 * 60 * 24 * 7)) + 1;
-    return weekNum < 1 ? 1 : weekNum;
+
+function capitalizeFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function formatRuDate(d) {
+    const formatter = new Intl.DateTimeFormat("ru-RU", {
+        day: "numeric",
+        month: "long"
+    });
+    const parts = formatter.formatToParts(d);
+    const dayPart = parts.find((p) => p.type === "day")?.value || "";
+    const monthPart = parts.find((p) => p.type === "month")?.value || "";
+    return `${dayPart} ${monthPart}`;
 }
 
 function updateDateTime() {
     const now = new Date();
-    document.getElementById("weekday").textContent = getRuWeekday(now);
-    document.getElementById("time").textContent = `${leading0(
-        now.getHours()
-    )}:${leading0(now.getMinutes())}`;
-    document.getElementById(
-        "fulldate"
-    ).textContent = `${now.getDate()} ${now.toLocaleString("ru-RU", {
-        month: "long",
-    })}`;
+    document.getElementById("time").textContent =
+        `${leading0(now.getHours())}:${leading0(now.getMinutes())}`;
+    const weekday = getRuWeekdayFull(now);
+    document.getElementById("weekdayText").textContent =
+        capitalizeFirst(weekday);
+    document.getElementById("fulldate").textContent = formatRuDate(now);
     setTimeout(syncHeaderBlocks, 50);
 }
 setInterval(updateDateTime, 1000);
 updateDateTime();
 
-// Погода
 const API_KEY = "1df2eb92e9b510458f1e2edebaace0eb";
 const CITY = "Moscow";
 
@@ -174,41 +128,44 @@ function fetchWeather() {
     )
         .then((r) => r.json())
         .then((data) => {
-            document.getElementById("weather-temp").textContent = data.main
-                ? data.main.temp > 0
-                    ? `+${Math.round(data.main.temp)}`
-                    : `${Math.round(data.main.temp)}`
-                : "--";
-            document.getElementById("weather-feel").textContent = data.main
-                ? `По ощущению ${
-                      data.main.feels_like > 0 ? "+" : ""
-                  }${Math.round(data.main.feels_like)}`
-                : "";
-            document.getElementById("weather-desc").textContent = data
-                .weather?.[0]
-                ? data.weather[0].description[0].toUpperCase() +
-                  data.weather[0].description.slice(1)
-                : "";
-            document.getElementById("weather-wind").textContent = data.wind
-                ? `${data.wind.speed} м/с`
-                : "--";
-            document.getElementById("weather-pressure").textContent = data.main
-                ? `${Math.round(data.main.pressure * 0.750062)} мм рт. ст.`
-                : "--";
-            document.getElementById("weather-humidity").textContent = data.main
-                ? `${data.main.humidity}%`
-                : "--";
+            const temp = data.main?.temp;
+            const feel = data.main?.feels_like;
+            const desc = data.weather?.[0]?.description || "";
+
+            document.getElementById("weather-temp").textContent =
+                data.main
+                    ? (temp > 0 ? "+" : "") + Math.round(temp) + "°"
+                    : "--";
+
+            document.getElementById("weather-feel").textContent =
+                data.main
+                    ? `По ощущениям ${(feel > 0 ? "+" : "") + Math.round(feel)}°`
+                    : "";
+
+            document.getElementById("weather-desc").textContent =
+                desc ? desc[0].toUpperCase() + desc.slice(1) : "";
+
+            document.getElementById("weather-wind").textContent =
+                data.wind ? `${data.wind.speed} м/с` : "--";
+
+            document.getElementById("weather-pressure").textContent =
+                data.main
+                    ? `${Math.round(data.main.pressure * 0.750062)} мм рт. ст.`
+                    : "--";
+
+            document.getElementById("weather-humidity").textContent =
+                data.main ? `${data.main.humidity}%` : "--";
+
             const formatTime = (ts) => {
                 if (!ts) return "--:--";
                 const d = new Date(ts * 1000);
                 return leading0(d.getHours()) + ":" + leading0(d.getMinutes());
             };
-            document.getElementById("sunrise").textContent = formatTime(
-                data.sys?.sunrise
-            );
-            document.getElementById("sunset").textContent = formatTime(
-                data.sys?.sunset
-            );
+
+            document.getElementById("sunrise").textContent =
+                formatTime(data.sys?.sunrise);
+            document.getElementById("sunset").textContent =
+                formatTime(data.sys?.sunset);
         })
         .catch(() => {
             document.getElementById("weather-temp").textContent = "--";
