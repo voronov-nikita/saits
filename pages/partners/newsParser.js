@@ -1,4 +1,4 @@
-const NEWS_URL = "https://corsproxy.io/?https://priem.mirea.ru/news";
+const NEWS_URL = "https://priem.mirea.ru/news";
 let newsCards = [];
 let newsIndex = 0;
 
