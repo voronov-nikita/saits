@@ -21,14 +21,15 @@
 
                 <div class="news-card" id="newsCard">
                     <div class="news-card-image">
-                        <img id="newsImage" src="./img/placeholder.jpg" alt="Новость" />
+                        <a id="newsLink" href="#" target="_blank" rel="noopener noreferrer">
+                            <img id="newsImage" src="./img/placeholder.jpg" alt="Новость" />
+                        </a>
                     </div>
                     <div class="news-card-body">
+                        <div class="news-card-tags" id="newsTags"></div>
                         <h3 class="news-card-title" id="newsTitle">Загрузка новостей...</h3>
                         <div class="news-card-date" id="newsDate"></div>
-                        <a class="news-card-btn" id="newsLink" href="#" target="_blank" rel="noopener noreferrer">
-                            Перейти к новости
-                        </a>
+                        <p class="news-card-excerpt" id="newsExcerpt"></p>
                     </div>
                 </div>
             </div>
