@@ -267,10 +267,6 @@ body {
     animation: partners-scroll 20s linear infinite;
 }
 
-.partners-track:hover {
-    animation-play-state: paused;
-}
-
 @keyframes partners-scroll {
     0% {
         transform: translateX(-50%);

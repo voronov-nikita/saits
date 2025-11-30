@@ -1,4 +1,6 @@
-const NEWS_URL = "https://priem.mirea.ru/news";
+// const PROXY = "https://corsproxy.io/?";
+const NEWS_URL =  "https://priem.mirea.ru/news";
+
 const SITE_ORIGIN = "https://priem.mirea.ru";
 // путь от корня твоего dev-сервера
 const PLACEHOLDER = "/img/";
@@ -41,7 +43,7 @@ async function fetchNews() {
   titleEl.textContent = "Загрузка новостей...";
 
   try {
-    const resp = await fetch(NEWS_URL, { mode: "cors" });
+    const resp = await fetch(NEWS_URL, {mode: "no-cors"});
     const html = await resp.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
